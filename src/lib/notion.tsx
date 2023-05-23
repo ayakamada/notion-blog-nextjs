@@ -6,28 +6,19 @@ export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
+const publishedFilter = {
+  property: "Published",
+  checkbox: {
+    equals: true,
+  },
+};
+
 export const fetchPages = async () => {
-  // return notion.databases.query({
-  //   database_id: process.env.NOTION_DATABASE_ID!,
-  //   filter: {
-  //     property: "Status",
-  //     select: {
-  //       equals: "Published",
-  //     },
-  //   },
-  // });
   return await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
     // Filter out posts not checked to publish.
     filter: {
-      and: [
-        {
-          property: "Published",
-          checkbox: {
-            equals: true,
-          },
-        },
-      ],
+      and: [publishedFilter],
     },
     // Sort posts in descending order based on the Date column.
     sorts: [
@@ -44,10 +35,7 @@ export const fetchPageBySlug = async (slug: string) => {
     .query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        property: "Slug",
-        rich_text: {
-          equals: slug,
-        },
+        and: [publishedFilter],
       },
     })
     .then((res) => res.results[0] as PageObjectResponse | undefined);
