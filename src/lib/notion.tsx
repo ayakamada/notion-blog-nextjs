@@ -30,12 +30,20 @@ export const fetchPages = async () => {
   });
 };
 
-export const fetchPageBySlug = async (slug: string) => {
-  return await notion.databases
+// export const getPage = async (pageId:string) => {
+//   const response = await notion.pages.retrieve({ page_id: pageId });
+//   return response;
+// };
+
+export const fetchPageBySlug = (slug: string) => {
+  return notion.databases
     .query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        and: [publishedFilter],
+        property: "Slug",
+        rich_text: {
+          equals: slug,
+        },
       },
     })
     .then((res) => res.results[0] as PageObjectResponse | undefined);
