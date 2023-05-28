@@ -6,7 +6,6 @@ import formatDate from "@/lib/utils/formatDate";
 type Post = /*unresolved*/ any;
 
 export default function Home({ posts }: { posts: Post[] }) {
-  console.log(posts);
   return (
     <main className="">
       <ul>
