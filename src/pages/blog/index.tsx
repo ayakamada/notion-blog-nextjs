@@ -7,7 +7,7 @@ import formatDate from "@/lib/utils/formatDate";
 type Post = /*unresolved*/ any;
 
 export default function BlogIndex({ posts }: { posts: Post[] }) {
-  console.log(posts);
+  // console.log(posts);
   return (
     <main className="">
       {posts.map((post, i) => (
