@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Link from "next/link";
 
 import SectionContainer from "@/components/SectionContainer";
+import ThemeSwitch from "@/components/ThemeSwitch";
 import headerNavLinks from "@/data/headerNavLinks";
 
 import { siteMetadata } from "@/data/siteMetadata";
@@ -26,12 +27,13 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                  className="p-1 font-medium text-gray-900 dark:text-gray-50 sm:p-4"
                 >
                   {link.title}
                 </Link>
               ))}
             </div>
+            <ThemeSwitch />
           </div>
         </header>
         <main className="mb-auto">{children}</main>
