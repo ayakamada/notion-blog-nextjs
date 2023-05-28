@@ -51,8 +51,6 @@ export default function BlogIndex({ posts }: { posts: Post[] }) {
 export const getServerSideProps = async () => {
   const posts = await fetchPages();
 
-  console.log(posts);
-
   return {
     props: {
       posts: posts.results,

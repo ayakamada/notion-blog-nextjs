@@ -5,16 +5,18 @@ import Link from "next/link";
 import SectionContainer from "@/components/SectionContainer";
 import headerNavLinks from "@/data/headerNavLinks";
 
+import { siteMetadata } from "@/data/siteMetadata";
+
 const LayoutWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <SectionContainer>
       <div className="flex h-screen flex-col justify-between">
         <header className="flex items-center justify-between py-10">
           <div>
-            <Link href="/" aria-label="Nextjs + Notion BLOG">
+            <Link href="/" aria-label={siteMetadata.title}>
               <div className="flex items-center justify-between">
                 <div className="mr-3">{/* <Logo /> */}</div>
-                Nextjs + Notion BLOG
+                <div className="hidden h-6 text-2xl font-semibold sm:block">{siteMetadata.title}</div>
               </div>
             </Link>
           </div>
