@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { fetchPages } from "@/lib/notion";
+import { publishedPages } from "@/lib/notion/publishPages";
+
 import Link from "next/link";
 
 import formatDate from "@/lib/utils/formatDate";
@@ -47,8 +48,8 @@ export default function BlogIndex({ posts }: { posts: Post[] }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const posts = await fetchPages();
+export const getStaticProps = async () => {
+  const posts = await publishedPages();
 
   return {
     props: {
