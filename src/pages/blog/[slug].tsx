@@ -1,13 +1,16 @@
-import Image from "next/image";
-import { fetchPages, fetchPageBySlug, fetchPageBlocks, notion } from "@/lib/notion";
+import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType, NextPage, GetStaticPaths } from "next";
+import { notion } from "@/lib/notion";
+import { fetchPageBlocks } from "@/lib/notion/pageBlocks";
+import { getPageBySlug } from "@/lib/notion/getPage";
+
+import { INotionPage } from "@/lib/types/notion-page";
+
 import bookmarkPlugin from "@notion-render/bookmark-plugin";
 import { NotionRenderer } from "@notion-render/client";
 import hljsPlugin from "@notion-render/hljs-plugin";
 import "@notion-render/client/sass/theme.scss";
 
-type Post = /*unresolved*/ any;
-
-export default function Home({ post, html }: { post: Post; html: string }) {
+export default function Home({ post, html }: { post: INotionPage; html: string }) {
   return (
     <main className={` `}>
       <div className="notion-render" dangerouslySetInnerHTML={{ __html: html }}></div>
@@ -16,12 +19,19 @@ export default function Home({ post, html }: { post: Post; html: string }) {
 }
 
 // slugを取得する
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+  return {
+    paths: [],
+    fallback: false,
+  };
+};
 
-export const getServerSideProps = async (context: any) => {
-  const { slug } = context.params;
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const slug = params?.slug as string;
+
   let blocks = [] as any;
   let html = "";
-  const post = await fetchPageBySlug(slug);
+  const post = await getPageBySlug(slug);
 
   if (post) {
     blocks = await fetchPageBlocks(post.id);
