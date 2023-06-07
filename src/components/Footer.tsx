@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteMetadata } from "@/data/siteMetadata";
+import { siteMetaData } from "@/data/siteMetaData";
 
 export default function Footer() {
   return (
@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="mt-16 flex flex-col items-center">
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div>{`© ${new Date().getFullYear()}`}</div>
-          <Link href="/">{siteMetadata.title}</Link>
+          <Link href="/">{siteMetaData.title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
           <div>aya kamada</div>

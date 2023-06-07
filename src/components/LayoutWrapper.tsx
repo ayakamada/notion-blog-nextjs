@@ -6,7 +6,7 @@ import SectionContainer from "@/components/SectionContainer";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import headerNavLinks from "@/data/headerNavLinks";
 
-import { siteMetadata } from "@/data/siteMetadata";
+import { siteMetaData } from "@/data/siteMetaData";
 
 const LayoutWrapper = ({ children }: { children: ReactNode }) => {
   return (
@@ -14,10 +14,10 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
       <div className="flex h-screen flex-col justify-between">
         <header className="flex items-center justify-between py-10">
           <div>
-            <Link href="/" aria-label={siteMetadata.title}>
+            <Link href="/" aria-label={siteMetaData.title}>
               <div className="flex items-center justify-between">
                 <div className="mr-3">{/* <Logo /> */}</div>
-                <div className="hidden h-6 text-2xl font-semibold sm:block">{siteMetadata.title}</div>
+                <div className="hidden h-6 text-2xl font-semibold sm:block">{siteMetaData.title}</div>
               </div>
             </Link>
           </div>
