@@ -16,6 +16,8 @@
   }
 }
 
-/* body {
-  height: 100vh;
-} */
+.notion-code pre code,
+.notion-render div.notion-code pre code {
+  color: #abb2bf;
+  background-color: #282c34 !important;
+}
