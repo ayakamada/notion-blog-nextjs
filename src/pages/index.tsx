@@ -1,15 +1,18 @@
 import Image from "next/image";
-import { fetchPages } from "@/lib/notion";
+import { publishedPages } from "@/lib/notion/publishPages";
 import Link from "next/link";
 import formatDate from "@/lib/utils/formatDate";
 
 type Post = /*unresolved*/ any;
 
+const MAX_DISPLAY = 5;
+
 export default function Home({ posts }: { posts: Post[] }) {
   return (
     <main className="">
       <ul>
-        {posts.map((post, i) => (
+        {!posts.length && "No posts found."}
+        {posts.slice(0, MAX_DISPLAY).map((post, i) => (
           <li key={i} className="py-4">
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <dl>
@@ -41,16 +44,28 @@ export default function Home({ posts }: { posts: Post[] }) {
           </li>
         ))}
       </ul>
+      {posts.length > MAX_DISPLAY && (
+        <div className="flex justify-end text-base font-medium leading-6">
+          <Link
+            href="/blog"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="all posts"
+          >
+            All Posts &rarr;
+          </Link>
+        </div>
+      )}
     </main>
   );
 }
 
-export const getServerSideProps = async () => {
-  const posts = await fetchPages();
+export const getStaticProps = async () => {
+  const response = await publishedPages(MAX_DISPLAY);
+  // const posts = await publishedPages();
 
   return {
     props: {
-      posts: posts.results,
+      posts: response.results,
     },
   };
 };
