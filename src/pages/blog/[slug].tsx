@@ -22,7 +22,7 @@ export default function Home({ post, html }: { post: INotionPage; html: string }
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
     paths: [],
-    fallback: false,
+    fallback: true,
   };
 };
 
